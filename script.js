@@ -17,6 +17,12 @@ const winPattern = [
   [2, 4, 6],
 ];
 
+const resetGame = () => {
+    turn0 = true;
+    enableBoxes();
+    winningContainer.classList.add("hide");
+}
+
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
     // console.log("button was clicked");
@@ -34,9 +40,14 @@ boxes.forEach((box) => {
 });
 
 const disableBoxes = () => {
-  turn0 = true;
   for (let box of boxes) {
     box.disabled = true;
+  }
+};
+const enableBoxes = () => {
+  for (let box of boxes) {
+    box.disabled = false;
+    box.innerHTML = "";
   }
 };
 
@@ -66,3 +77,7 @@ const checkWinner = () => {
     }
   }
 };
+
+// Calling reset function for reset or new game
+resetBtn.addEventListener("click", resetGame);
+newGameBtn.addEventListener("click", resetGame);
