@@ -43,3 +43,23 @@ body {
   background-color: black;
   color: white;
 }
+.hide {
+  display: none;
+}
+#msg {
+  font-size: 5vmin;
+  font-weight: bold;
+  color: whitesmoke;
+  margin: 10px 00;
+}
+#new-game-btn {
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
+}
+#new-game-btn:hover {
+  background-color: black;
+  color: white;
+}
