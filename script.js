@@ -5,6 +5,7 @@ let newGameBtn = document.querySelector("#new-game-btn");
 let msg = document.querySelector("#msg");
 
 let turn0 = true; //PlayerX, player0
+let count = 0;
 
 const winPattern = [
   [0, 1, 2],
@@ -18,26 +19,39 @@ const winPattern = [
 ];
 
 const resetGame = () => {
-    turn0 = true;
-    enableBoxes();
-    winningContainer.classList.add("hide");
-}
+  turn0 = true;
+  enableBoxes();
+  winningContainer.classList.add("hide");
+};
 
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
     // console.log("button was clicked");
     if (turn0) {
       box.innerHTML = "0";
+      box.classList.add("player0");
       turn0 = false;
     } else {
       box.innerHTML = "X";
+      box.classList.add("playerX");
       turn0 = true;
     }
     box.disabled = true;
+    count++;
 
-    checkWinner();
+    let isWinner = checkWinner();
+
+    if (count === 9 && !isWinner) {
+      gameDraw();
+    }
   });
 });
+
+const gameDraw = () => {
+  msg.innerHTML = `Game was draw. Start new game`;
+  winningContainer.classList.remove("hide");
+  disableBoxes();
+};
 
 const disableBoxes = () => {
   for (let box of boxes) {
@@ -73,6 +87,7 @@ const checkWinner = () => {
     if (val1 != "" && val2 != "" && val3 != "") {
       if (val1 === val2 && val2 === val3) {
         shoWinner(val1);
+        return true;
       }
     }
   }
